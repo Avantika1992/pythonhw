@@ -1,0 +1,47 @@
+{
+    "family": "console-custom",
+    "volumes": [
+        {
+            "name": "my-vol",
+            "host": {}
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "environment": [],
+            "name": "python",
+            "image": "682235035103.dkr.ecr.us-east-1.amazonaws.com/hello-repository:latest",
+            "cpu": 10,
+            "memory": 500,
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ],
+            "entryPoint": [
+                "app.py"
+            ],
+            "essential": true
+        },
+        {
+            "name": "busybox",
+            "image": "busybox",
+            "cpu": 10,
+            "memory": 500,
+            "volumesFrom": [
+            {
+              "sourceContainer": "python"
+            }
+            ],
+            "entryPoint": [
+                "sh",
+                "-c"
+            ],
+            "command": [
+                "/bin/sh -c \"while true; do /bin/date > /var/www/my-vol/date; sleep 1; done\""
+            ],
+            "essential": false
+        }
+    ]
+}
