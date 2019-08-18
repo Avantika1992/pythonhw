@@ -1,0 +1,19 @@
+{
+    "containerDefinitions": [
+        {
+            "environment": [],
+            "name": "python",
+            "image": "682235035103.dkr.ecr.us-east-1.amazonaws.com/hello-repository:latest",
+            "cpu": 10,
+            "memory": 500,
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ],
+            
+            "essential": true
+        }
+    ]
+}
